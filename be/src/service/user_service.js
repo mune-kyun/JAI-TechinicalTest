@@ -13,7 +13,7 @@ const login = async (username, password) => {
 
   const token = jwt.sign({ username }, "secret");
 
-  return token;
+  return { token, username };
 };
 
 module.exports = { login };

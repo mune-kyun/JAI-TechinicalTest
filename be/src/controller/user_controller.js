@@ -6,9 +6,9 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   const { username, password } = req.body;
-  const token = await userService.login(username, password);
+  const data = await userService.login(username, password);
 
-  res.send({ token });
+  res.send({ data });
 };
 
 module.exports = { login };
