@@ -11,9 +11,10 @@ datasource db {
 }
 
 model JUser {
-  id             Int    @id @default(autoincrement())
-  username       String @unique
+  id             Int     @id @default(autoincrement())
+  username       String  @unique
   hashedPassword String
+  Order          Order[]
 }
 
 model Order {
@@ -22,4 +23,6 @@ model Order {
   productQuantity Int
   productPrice    Int
   date            DateTime @default(now())
+  user            JUser    @relation(fields: [jUserId], references: [id])
+  jUserId         Int
 }
