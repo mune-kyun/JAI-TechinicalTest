@@ -7,7 +7,7 @@
 
 # Run with db only being dockerize
 
-Make sure you're in the most top directory. Then run these steps in order.
+Make sure you're in the most top directory. Then run these steps in order. Also, make sure to run these steps in 3 different terminal.
 
 ### init db:
 
