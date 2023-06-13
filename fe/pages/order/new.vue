@@ -2,7 +2,7 @@
   <div class="h-full w-full flex py-10 px-10 justify-center items-center">
     <c-alert-vue :show="showAlert" :text="'Order '" :mode="alertMode" />
     <div class="flex flex-col gap-3 w-1/2">
-      <h1 class="text-center">New Order</h1>
+      <h1 class="text-center text-xl">New Order</h1>
       <form
         ref="form"
         class="block p-6 bg-white border border-gray-400 rounded-lg shadow"

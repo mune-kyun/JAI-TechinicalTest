@@ -4,7 +4,7 @@
       label
     }}</label>
     <div class="flex items-center gap-2">
-      <label v-if="currency">{{ currency }}</label>
+      <label v-if="currency" class="text-sm">{{ currency }}</label>
       <input
         :value="value"
         :placeholder="placeholder"

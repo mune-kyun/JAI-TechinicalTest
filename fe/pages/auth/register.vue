@@ -17,6 +17,16 @@
         >
           Register
         </button>
+        <div class="flex text-sm mt-6">
+          <span
+            >Already have an account?
+            <router-link
+              :to="{ path: '/auth/login' }"
+              class="text-blue-600 hover:text-blue-700"
+              >Login</router-link
+            ></span
+          >
+        </div>
       </form>
     </div>
   </div>
