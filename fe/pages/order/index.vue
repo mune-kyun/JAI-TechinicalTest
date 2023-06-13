@@ -11,8 +11,11 @@
           <p>New Order</p>
         </nuxt-link>
       </div>
-      <div class="flex flex-wrap gap-4 mt-4">
+      <div v-if="orders.length > 0" class="flex flex-wrap gap-4 mt-4">
         <CCard v-for="order in orders" v-bind="order" :key="order.id" />
+      </div>
+      <div v-else class="flex flex-wrap gap-4 mt-10">
+        <h1 class="text-xl text-slate-500">Looks like you got no order</h1>
       </div>
     </div>
   </div>
@@ -33,7 +36,7 @@ export default {
   },
   async beforeMount() {
     await this.$axios
-      .$get('http://localhost:8000/api/order', {
+      .$get(process.env.BE + '/order', {
         headers: {
           Authorization: `Bearer ${this.$store.state.auth.token}`,
         },

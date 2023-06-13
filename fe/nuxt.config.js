@@ -4,6 +4,10 @@ export default {
 
   ssr: false,
 
+  env: {
+    BE: 'http://localhost:8000/api/',
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Orudoro',

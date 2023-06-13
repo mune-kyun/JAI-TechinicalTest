@@ -76,7 +76,7 @@ export default {
       } else {
         await this.$axios
           .$post(
-            'http://localhost:8000/api/order',
+            process.env.BE + '/order',
             {
               data: {
                 name: this.name,
@@ -100,6 +100,7 @@ export default {
           .catch((e) => {
             this.error = e
             console.log(this.error)
+            this.alertMode = 'failed'
           })
       }
 
