@@ -3,19 +3,47 @@
     <label class="block mb-2 text-sm font-medium text-gray-900">{{
       label
     }}</label>
-    <input
-      :value="value"
-      :placeholder="placeholder"
-      :required="required"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-      :type="type"
-      @input="$emit('input', $event.target.value)"
-    />
+    <div class="flex items-center gap-2">
+      <label v-if="currency">{{ currency }}</label>
+      <input
+        :value="value"
+        :placeholder="placeholder"
+        :required="required"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+        :type="type"
+        @input="$emit('input', $event.target.value)"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['label', 'type', 'placeholder', 'value', 'required'],
+  props: {
+    label: {
+      type: String,
+      required: true,
+    },
+    type: {
+      type: String,
+      required: true,
+    },
+    placeholder: {
+      type: String,
+      required: true,
+    },
+    value: {
+      type: String,
+      required: true,
+    },
+    required: {
+      type: Boolean,
+      required: true,
+    },
+    currency: {
+      type: String,
+      default: '',
+    },
+  },
 }
 </script>
