@@ -1,7 +1,11 @@
 const userService = require("../service/user_service");
 
 const register = async (req, res) => {
-  res.send("login");
+  const { username, password } = req.body;
+  const newUsername = await userService.register(username, password);
+
+  if (newUsername) res.send({ data: { username: newUsername } });
+  else res.sendStatus(400);
 };
 
 const login = async (req, res) => {
@@ -11,4 +15,4 @@ const login = async (req, res) => {
   res.send({ data });
 };
 
-module.exports = { login };
+module.exports = { login, register };

@@ -1,6 +1,25 @@
 const { prisma } = require("../utils/prisma");
 const jwt = require("jsonwebtoken");
 
+const register = async (username, password) => {
+  const user = await prisma.jUser.findFirst({
+    where: {
+      username,
+    },
+  });
+
+  if (user) return null;
+
+  await prisma.jUser.create({
+    data: {
+      username,
+      hashedPassword: password,
+    },
+  });
+
+  return username;
+};
+
 const login = async (username, password) => {
   const user = await prisma.jUser.findFirst({
     where: {
@@ -16,4 +35,4 @@ const login = async (username, password) => {
   return { token, username };
 };
 
-module.exports = { login };
+module.exports = { login, register };
