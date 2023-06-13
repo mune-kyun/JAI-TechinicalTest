@@ -7,7 +7,11 @@
     "dev": "nodemon ./src/server.js",
     "migrate": "npx prisma migrate dev",
     "generate": "npx prisma generate",
-    "studio": "npx prisma studio"
+    "studio": "npx prisma studio",
+    "seed": "npx prisma db seed"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   },
   "author": "",
   "license": "ISC",
