@@ -7,7 +7,7 @@ RUN npm install
 
 COPY src src
 COPY prisma prisma
-COPY .env .env
+COPY .env-prod .env
 
 RUN npm install
 RUN npm run migrate
