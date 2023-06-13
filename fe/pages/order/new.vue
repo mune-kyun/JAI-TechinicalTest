@@ -1,5 +1,6 @@
 <template>
   <div class="h-full w-full flex py-10 px-10 justify-center items-center">
+    <c-alert-vue :show="showAlert" :text="'Order '" :mode="alertMode" />
     <div class="flex flex-col gap-3 w-1/2">
       <h1 class="text-center">New Order</h1>
       <form
@@ -23,12 +24,14 @@
 </template>
 
 <script>
+import CAlertVue from '~/components/universal/CAlert.vue'
 import CInput from '~/components/universal/CInput.vue'
 
 export default {
   name: 'NewOrderPage',
   components: {
     CInput,
+    CAlertVue,
   },
   data() {
     return {
@@ -59,42 +62,53 @@ export default {
           currency: 'Rp',
         },
       ],
+      showAlert: false,
+      alertMode: 'success',
     }
   },
   methods: {
     submitForm: async function () {
+      let isSuccess = false
+
       if (!this.$refs.form.checkValidity()) {
-        // remove alert on prod
         this.error = 'Invalid form'
-        return
+        this.alertMode = 'failed'
+      } else {
+        await this.$axios
+          .$post(
+            'http://localhost:8000/api/order',
+            {
+              data: {
+                name: this.name,
+                quantity: Number(this.quantity),
+                price: Number(this.price),
+              },
+            },
+            {
+              headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                Authorization: 'Bearer ' + this.$store.state.auth.token,
+              },
+            }
+          )
+          .then((res) => {
+            if (res.data) {
+              isSuccess = true
+              this.alertMode = 'success'
+            }
+          })
+          .catch((e) => {
+            this.error = e
+            console.log(this.error)
+          })
       }
 
-      await this.$axios
-        .$post(
-          'http://localhost:8000/api/order',
-          {
-            data: {
-              name: this.name,
-              quantity: Number(this.quantity),
-              price: Number(this.price),
-            },
-          },
-          {
-            headers: {
-              'Content-Type': 'application/json; charset=utf-8',
-              Authorization: 'Bearer ' + this.$store.state.auth.token,
-            },
-          }
-        )
-        .then((res) => {
-          if (res.data) {
-            this.$router.push('/order')
-          }
-        })
-        .catch((e) => {
-          this.error = e
-          console.log(this.error)
-        })
+      this.showAlert = true
+
+      setTimeout(() => {
+        this.showAlert = false
+        if (isSuccess) this.$router.push('/order')
+      }, 2000)
     },
   },
 }
