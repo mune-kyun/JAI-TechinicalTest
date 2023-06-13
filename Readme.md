@@ -17,6 +17,7 @@ Make sure you're in the most top directory. Then run these steps in order. Also,
 
 - change directory to be (cd be)
 - npm install
+- npm run migrate
 - npm run generate
 - npm run seed
 - npm run dev
